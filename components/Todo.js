@@ -6,30 +6,30 @@ export default class Todo {
 
   _setEventListeners() {
     this._element
-      .querySelector(".todo__delete-button")
+      .querySelector(".todo__delete-btn")
       .addEventListener("click", () => this._element.remove());
 
-    const checkbox = this._element.querySelector(".todo__checkbox");
+    const checkbox = this._element.querySelector(".todo__completed");
+    console.log(this._element);
     checkbox.addEventListener("change", (e) => {
-      this._element.classList.toggle("todo_completed", e.target.checked);
+      this._element.classList.toggle("todo__completed", e.target.checked);
     });
   }
 
   getView() {
-    const template = document
+    this._element = document
       .querySelector(this._selector)
-      .content.cloneNode(true);
+      .content.firstElementChild.cloneNode(true);
 
-    this._element = template.querySelector(".todo");
-
-    const checkbox = this._element.querySelector(".todo__checkbox");
+    const checkbox = this._element.querySelector(".todo__completed");
     const label = this._element.querySelector(".todo__label");
+    const name = this._element.querySelector(".todo__name");
     const dateDisplay = this._element.querySelector(".todo__date");
 
     const id = `todo-${this._data.id}`;
     checkbox.id = id;
     label.setAttribute("for", id);
-    label.textContent = this._data.name;
+    name.textContent = this._data.name;
 
     if (this._data.completed) {
       checkbox.checked = true;

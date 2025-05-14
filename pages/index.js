@@ -3,15 +3,13 @@ import Todo from "../components/Todo.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { initialTodos, validationConfig } from "../utils/constants.js";
 
-const formEl = document.querySelector(".modal__form");
-const validator = new FormValidator(validationConfig, formEl);
-validator.enableValidation();
-
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopup.querySelector(".popup__form");
 const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
+const validator = new FormValidator(validationConfig, addTodoForm);
+validator.enableValidation();
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
 };
