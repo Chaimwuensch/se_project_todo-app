@@ -1,19 +1,22 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+my project todo app
 
 ## Functionality
-
-Give a more detailed explanation of the project and its functionality.
+its real nice
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+looks dope
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
+<<<<<<< HEAD
 ## 🚀 Live Demo
 
 [Check it out on GitHub Pages](https://github.com/Chaimwuensch/se_project_todo-app.git)
+=======
+[- ADD LINK HERE](https://github.com/Chaimwuensch/se_project_todo-app.git)
+>>>>>>> 5ad272ebf79cf57f6f489672b98bfebe9f98c57a
