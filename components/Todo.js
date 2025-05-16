@@ -5,14 +5,16 @@ export default class Todo {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".todo__delete-btn")
-      .addEventListener("click", () => this._element.remove());
+    const deleteBtn = this._element.querySelector(".todo__delete-btn");
+    deleteBtn.addEventListener("click", () => {
+      this._element.remove();
+      this._element = null;
+    });
 
-    const checkbox = this._element.querySelector(".todo__completed");
-    console.log(this._element);
-    checkbox.addEventListener("change", (e) => {
-      this._element.classList.toggle("todo__completed", e.target.checked);
+    this._checkbox = this._element.querySelector(".todo__completed");
+    this._checkbox.addEventListener("change", (e) => {
+      if (!this._element) return;
+      this._element.classList.toggle("todo_completed", e.target.checked);
     });
   }
 
@@ -21,18 +23,18 @@ export default class Todo {
       .querySelector(this._selector)
       .content.firstElementChild.cloneNode(true);
 
-    const checkbox = this._element.querySelector(".todo__completed");
+    this._checkbox = this._element.querySelector(".todo__completed");
     const label = this._element.querySelector(".todo__label");
     const name = this._element.querySelector(".todo__name");
     const dateDisplay = this._element.querySelector(".todo__date");
 
     const id = `todo-${this._data.id}`;
-    checkbox.id = id;
+    this._checkbox.id = id;
     label.setAttribute("for", id);
     name.textContent = this._data.name;
 
     if (this._data.completed) {
-      checkbox.checked = true;
+      this._checkbox.checked = true;
       this._element.classList.add("todo_completed");
     }
 

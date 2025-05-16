@@ -14,11 +14,13 @@ export default class FormValidator {
     const errorEl = this._formEl.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.add(this._config.inputErrorClass);
     errorEl.textContent = inputEl.validationMessage;
+    errorEl.classList.add(this._config.errorClass);
   }
 
   _hideInputError(inputEl) {
     const errorEl = this._formEl.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.remove(this._config.inputErrorClass);
+    errorEl.classList.remove(this._config.errorClass);
     errorEl.textContent = "";
   }
 
@@ -31,7 +33,7 @@ export default class FormValidator {
   }
 
   _toggleButtonState() {
-    const isValid = this._inputEls.every((inputEl) => inputEl.validity.valid);
+    const isValid = this._inputEls.some((inputEl) => inputEl.validity.valid);
     this._submitButton.disabled = !isValid;
     this._submitButton.classList.toggle(
       this._config.inactiveButtonClass,
