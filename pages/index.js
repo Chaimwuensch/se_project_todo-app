@@ -10,6 +10,7 @@ const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 const validator = new FormValidator(validationConfig, addTodoForm);
 validator.enableValidation();
+
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
 };
@@ -28,8 +29,13 @@ const renderTodo = (item) => {
   todosList.append(todo);
 };
 
+// Render initial todos (moved below renderTodo definition)
+initialTodos.forEach(renderTodo);
+
 addTodoButton.addEventListener("click", () => {
   openModal(addTodoPopup);
+  addTodoForm.reset();
+  validator.toggleButtonState(); // ensures button is disabled when form opens
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
@@ -55,5 +61,6 @@ addTodoForm.addEventListener("submit", (evt) => {
 
   renderTodo(newTodo);
   addTodoForm.reset();
+  validator.toggleButtonState(); // ensures button resets to disabled state
   closeModal(addTodoPopup);
 });
