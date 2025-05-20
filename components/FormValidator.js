@@ -58,14 +58,7 @@ export default class FormValidator {
   enableValidation() {
     this._formEl.addEventListener("submit", (e) => e.preventDefault());
     this._setEventListeners();
-    const hasInvalidInput = this._inputEls.some(
-      (inputEl) => !inputEl.validity.valid
-    );
-    this._submitButton.disabled = hasInvalidInput;
-    this._submitButton.classList.toggle(
-      this._config.inactiveButtonClass,
-      hasInvalidInput
-    );
+    this._toggleButtonState();
   }
 
   resetValidation() {
