@@ -1,20 +1,29 @@
 export default class Todo {
-  constructor(data, selector) {
+  constructor(data, selector, { handleCheckboxChange, handleDelete } = {}) {
     this._data = data;
     this._selector = selector;
+    this._handleCheckboxChange = handleCheckboxChange;
+    this._handleDelete = handleDelete;
   }
 
   _setEventListeners() {
     const deleteBtn = this._element.querySelector(".todo__delete-btn");
     deleteBtn.addEventListener("click", () => {
+      const wasCompleted = this._checkbox.checked;
       this._element.remove();
       this._element = null;
+      if (this._handleDelete) {
+        this._handleDelete(wasCompleted);
+      }
     });
 
     this._checkbox = this._element.querySelector(".todo__completed");
     this._checkbox.addEventListener("change", (e) => {
       if (!this._element) return;
       this._element.classList.toggle("todo_completed", e.target.checked);
+      if (this._handleCheckboxChange) {
+        this._handleCheckboxChange(e.target.checked);
+      }
     });
   }
 
